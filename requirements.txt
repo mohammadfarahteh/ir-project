@@ -6,3 +6,4 @@ sentence-transformers
 ipython
 arxiv
 pypdf
+rank_bm25
