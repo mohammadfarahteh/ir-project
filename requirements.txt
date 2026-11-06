@@ -7,3 +7,4 @@ ipython
 arxiv
 pypdf
 rank_bm25
+ipywidgets
