@@ -417,57 +417,5 @@ def search_papers(query, method="Hybrid (RRF)"):
     return processed, results
 
 
-# 5. GUI
-import ipywidgets as widgets
-from IPython.display import display
-
-search_box = widgets.Text(
-    description="Search:",
-    placeholder="Enter your query",
-    value="nlp"
-)
-
-model_selector = widgets.Dropdown(
-    options=["Hybrid (RRF)", "BM25", "Dense"],
-    description="Model:"
-)
-
-button = widgets.Button(
-    description="Search",
-    button_style="success"
-)
-
-output = widgets.Output()
-
-def run_search(b):
-    output.clear_output()
-
-    with output:
-        try:
-            print("Searching...")
-
-            processed, results = search_papers(
-                search_box.value,
-                model_selector.value
-            )
-
-            print("Processed Query:", processed)
-            print()
-
-            for i, paper in enumerate(results, 1):
-                print("Rank:", i)
-                print("Title:", paper["title"])
-                print("Link:", paper["link"])
-                print("Snippet:", paper["snippet"])
-                print("Score:", round(float(paper["score"]), 5))
-                print("-" * 40)
-
-        except Exception as e:
-            print("Error:", str(e))
-
-button.on_click(run_search)
-
-display(search_box, model_selector, button, output)
-
 
 
