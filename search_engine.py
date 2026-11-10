@@ -1,9 +1,3 @@
-from IPython.display import display
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
 
 import arxiv
 import pandas as pd
