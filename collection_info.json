@@ -1,0 +1,11 @@
+{
+    "category": "cs.CL",
+    "date_range": "submittedDate:[202301010000 TO 202512312359]",
+    "queries": {
+        "Machine Translation": "cat:cs.CL AND \"machine translation\" AND submittedDate:[202301010000 TO 202512312359]",
+        "Question Answering": "cat:cs.CL AND \"question answering\" AND submittedDate:[202301010000 TO 202512312359]",
+        "Summarization": "cat:cs.CL AND summarization AND submittedDate:[202301010000 TO 202512312359]",
+        "Dialogue Systems": "cat:cs.CL AND \"dialogue systems\" AND submittedDate:[202301010000 TO 202512312359]"
+    },
+    "target_per_topic": 100
+}
