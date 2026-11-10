@@ -200,56 +200,6 @@ def hybrid_search(query, top_k=10):
     query_tokens = query.lower().split()
     bm25_scores = bm25.get_scores(query_tokens)
 
-    # Dense scores
-    query_embedding = model.encode(
-        query,
-        normalize_embeddings=True
-    )
-
-    dense_scores = np.dot(
-        document_embeddings,
-        query_embedding
-    )
-
-    # Rank both models
-    bm25_ranking = np.argsort(-bm25_scores)
-    dense_ranking = np.argsort(-dense_scores)
-
-    # Reciprocal Rank Fusion
-    rrf_scores = np.zeros(len(documents))
-
-    k = 60
-
-    for rank, index in enumerate(bm25_ranking):
-        rrf_scores[index] += 1 / (k + rank + 1)
-
-    for rank, index in enumerate(dense_ranking):
-        rrf_scores[index] += 1 / (k + rank + 1)
-
-    # Final fused ranking
-    final_ranking = np.argsort(-rrf_scores)[:top_k]
-
-    results = df.iloc[final_ranking].copy()
-    results["score"] = rrf_scores[final_ranking]
-
-    return results
-
-
-# 6. Test the search engine
-query = "machine translation using transformers"
-
-results = hybrid_search(query)
-
-# 7. Display top 10 results
-for rank, (_, paper) in enumerate(results.iterrows(), 1):
-
-    print("\nRank:", rank)
-    print("Title:", paper["title"])
-    print("Link:", paper["arxiv_link"])
-    print("Snippet:", paper["content"][:200])
-    print("RRF Score:", round(paper["score"], 5))
-    print("-" * 50)
-
 
 # In[12]:
 
